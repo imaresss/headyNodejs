@@ -1,3 +1,3 @@
 module.exports = {
-    url: 'mongodb://localhost:27017/easy-notes'
+    url: 'mongodb://ec2-13-233-130-81.ap-south-1.compute.amazonaws.com/womaniya_master'
 }

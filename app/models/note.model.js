@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
-const NoteSchema = mongoose.Schema({
-    title: String,
-    content: String
+
+const CategorySchema = mongoose.Schema({
+    id: Number,
+    categories: [Number]
 }, {
     timestamps: true
 });
 
-module.exports = mongoose.model('Note', NoteSchema);
+module.exports = mongoose.model('Category', CategorySchema);

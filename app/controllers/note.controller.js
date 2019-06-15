@@ -1,5 +1,6 @@
-const Note = require('../models/note.model.js');
+const Category = require('../models/note.model.js');
 
+const Product = require('../models/product.model.js');
 // Create and Save a new Note
 exports.create = (req, res) => {
     // Validate request
@@ -25,6 +26,64 @@ exports.create = (req, res) => {
         });
     });
 };
+
+
+exports.createCategry = (req, res) => {
+    // Validate request
+
+    // Create a Note
+    const category = new Category({
+        id: req.body.id , 
+        categories: req.body.categories
+    });
+
+    // Save Note in the database
+    category.save()
+    .then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the Note."
+        });
+    });
+};
+
+
+
+exports.product = (req, res) => {
+    // Validate request
+
+    // Create a Note
+    const product = new Product({
+        name: req.body.name , 
+        price: req.body.price,
+	categories : req.body.categories
+    });
+
+    // Save Note in the database
+    product.save()
+    .then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the Note."
+        });
+    });
+};
+
+
+exports.findAllProducts = (req, res) => {
+    Product.find({categories : {$in : req.body.category}})
+    .then(notes => {
+        res.send(notes);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
+
 
 // Retrieve and return all notes from the database.
 exports.findAll = (req, res) => {
