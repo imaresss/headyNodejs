@@ -31,6 +31,14 @@ exports.create = (req, res) => {
 exports.createCategry = (req, res) => {
     // Validate request
 
+	for(var i =0 ; i< req.body.parentCategories ; i++)
+	{
+		console.log( "the parent is " +req.body.parentCategories[i])
+		Category.update({"id": req.body.parentCategories[i] , $push: {categories :  req.body.id }  }, function (err, docs) {
+			console.log(err)
+		})
+	}
+
     // Create a Note
     const category = new Category({
         id: req.body.id , 
@@ -79,6 +87,46 @@ exports.findAllProducts = (req, res) => {
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
+
+exports.getAllCategory = (req, res) => {
+    Category.find({})
+    .then(notes => {
+        res.send(notes);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
+exports.updateProduct = (req, res) => {
+    // Validate Request
+
+    // Find note and update it with the request body
+    Product.findByIdAndUpdate(req.body.productId, {
+        name:req.body.name,
+        price:  req.body.price,
+	categories : req.body.categories
+    }, {new: true})
+    .then(note => {
+        if(!note) {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.noteId
+            });
+        }
+        res.send(note);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.noteId
+            });                
+        }
+        return res.status(500).send({
+            message: "Error updating note with id " + req.params.noteId
         });
     });
 };

@@ -6,9 +6,13 @@ module.exports = (app) => {
 
 
     app.post('/categories', notes.createCategry);
+    app.get('/getCategory', notes.getAllCategory);
     app.post('/product', notes.product);
+app.post('/updateProduct', notes.updateProduct);
     // Retrieve all Notes
     app.get('/notes', notes.findAll);
+
+
 
     app.post('/allProducts', notes.findAllProducts);
     // Retrieve a single Note with noteId
