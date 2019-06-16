@@ -18,7 +18,7 @@ exports.createCategry = (req, res) => {
 
     category.save()
     .then(data => {
-        res.send(data);
+        res.json({"success":"true"});
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while Adding category."
@@ -40,7 +40,7 @@ exports.product = (req, res) => {
 
     product.save()
     .then(data => {
-        res.send(data);
+        res.json({"success":"true"});
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while Adding A product."
@@ -74,6 +74,7 @@ exports.getAllCategory = (req, res) => {
 
 exports.updateProduct = (req, res) => {
 
+
     Product.findByIdAndUpdate(req.body.productId, {
         name:req.body.name,
         price:  req.body.price,
@@ -86,7 +87,8 @@ exports.updateProduct = (req, res) => {
                 message: "Product not found with id " + req.body.productId
             });
         }
-        res.send(product);
+
+        res.json({"success":"true"});
     }).catch(err => {
         return res.status(500).send({
             message: "Error updating product with id " + req.body.productId

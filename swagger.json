@@ -1,0 +1,337 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Heady Backend Project",
+    "description": "",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "ec2-13-233-148-110.ap-south-1.compute.amazonaws.com:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Product",
+      "description": "API for product"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/addCategory": {
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "Add id ,parentCategories and childCategories.. the parentCategory  will add this category to its childCategory field ",
+        "parameters": [
+          {
+            "name": "Category",
+            "in": "body",
+            "description": "Add id ,parentCategories and childCategories.. the parentCategory  will add this category to its childCategory field",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success True/False",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/addProduct": {
+      "post": {
+        "tags": [
+          ""
+        ],
+        "description": "Add a Product",
+        "parameters": [
+          {
+            "name": "Product",
+            "in": "body",
+            "description": "Add A product",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success True/False",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    }
+    ,
+    "/updateProduct": {
+      "post": {
+        "tags": [
+          ""
+        ],
+        "description": "Update a Product",
+        "parameters": [
+          {
+            "name": "Product",
+            "in": "body",
+            "description": "Update A product",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success True/False",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    }
+    ,
+    "/getAllProduct": {
+      "post": {
+        "tags": [
+          ""
+        ],
+        "description": "Get a Product by a Category",
+        "parameters": [
+          {
+            "name": "GetProduct",
+            "in": "body",
+            "description": "Get a Product by a Category",
+            "schema": {
+              "$ref": "#/definitions/GetProduct"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Product",
+            "schema": {
+              "$ref": "#/definitions/GetTheProduct"
+            }
+          }
+        }
+      }
+    }
+    
+    ,
+    "/getCategory": {
+      "get": {
+        "tags": [
+          ""
+        ],
+        "description": "Get Category",
+        "responses": {
+          "200": {
+            "description": "Category",
+            "schema": {
+              "$ref": "#/definitions/GetCategory"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": [
+        "email",
+        "_id"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        }
+      }
+      },
+
+
+    "Category": {
+      "required": [
+	"id",
+        "parentCategories",
+        "childCategories"
+      ],
+      "properties": {
+        "id": {
+          "type": "number",
+          "uniqueItems": true
+        },
+        "parentCategories": {
+          "type": "[number]",
+          "uniqueItems": true
+        },
+        "childCategories": {
+          "type": "[number]",
+          "uniqueItems": true
+        }
+      }
+    },
+    
+    "Product": {
+      "required": [
+	      "name",
+        "price",
+        "categories"
+      ],
+      "properties": {
+        "name": {
+          "type": "String",
+          "uniqueItems": true
+        },
+        "price": {
+          "type": "number",
+          "uniqueItems": true
+        },
+        "categories": {
+          "type": "[number]",
+          "uniqueItems": true
+        }
+      }
+    }
+    ,
+    
+    "GetProduct": {
+      "required": [
+	      "category"
+      ],
+      "properties": {
+        "category": {
+          "type": "number",
+          "uniqueItems": true
+        }
+      }
+    }
+    ,
+    
+    "GetTheProduct": {
+      "required": [
+	      "_id",
+	      "categories",
+	      "name",
+	      "price",
+	      "creationDate"
+	      ,
+	      "modificationDate"
+      ],
+      "properties": {
+        "name": {
+          "type": "String",
+          "uniqueItems": true
+        },
+        "price": {
+          "type": "number",
+          "uniqueItems": true
+        },
+        "categories": {
+          "type": "[number]",
+          "uniqueItems": true
+        }
+        ,
+        "_id": {
+          "type": "ObjetId",
+          "uniqueItems": true
+        }
+        ,
+        "creationDate": {
+          "type": "number",
+          "uniqueItems": true
+        }
+        ,
+        "modificationDate": {
+          "type": "number",
+          "uniqueItems": true
+        }
+      }
+    }
+    ,
+    
+    "Response": {
+      "required": [
+	      "success"
+      ],
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "uniqueItems": true
+        }
+      }
+    }
+        ,
+    
+    "GetCategory": {
+      "required": [
+	      "_id",
+	      "child_categories",
+	      "id",
+	      "creationDate"
+      ],
+      "properties": {
+        
+         "_id": {
+          "type": "ObjectId",
+          "uniqueItems": true
+        }
+        , "child_categories": {
+          "type": "[number]",
+          "uniqueItems": true
+        }
+        , "id": {
+          "type": "number",
+          "uniqueItems": true
+        }
+        
+        , "creationDate": {
+          "type": "number",
+          "uniqueItems": true
+        }
+        
+        
+      }
+    }
+  }
+}
+
