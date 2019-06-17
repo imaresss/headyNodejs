@@ -1,10 +1,10 @@
 {
-  "name": "node-easy-notes-app",
+  "name": "heady project",
   "version": "1.0.0",
-  "description": "Never miss a thing in Life. Take notes quickly. Organize and keep track of all your notes.",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
   "keywords": [
     "Express",
@@ -13,8 +13,8 @@
     "Mongoose",
     "Notes"
   ],
-  "author": "callicoder",
-  "license": "MIT",
+  "author": "Pulkit",
+  "license": "",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
