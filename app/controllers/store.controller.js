@@ -12,6 +12,7 @@ exports.createCategry = (req, res) => {
 
     const category = new Category({
         id: req.body.id , 
+	name : req.body.name,
         child_categories: req.body.childCategories,
 	creationDate : Math.floor(Date.now() / 1000)
     });

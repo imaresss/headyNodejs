@@ -192,6 +192,7 @@
     "Category": {
       "required": [
 	"id",
+	"name",
         "parentCategories",
         "childCategories"
       ],
@@ -199,7 +200,13 @@
         "id": {
           "type": "number",
           "uniqueItems": true
-        },
+        }
+	,
+        "name": {
+          "type": "string",
+          "uniqueItems": true
+        }
+	,
         "parentCategories": {
           "type": "[number]",
           "uniqueItems": true
@@ -219,7 +226,7 @@
       ],
       "properties": {
         "name": {
-          "type": "String",
+          "type": "string",
           "uniqueItems": true
         },
         "price": {
@@ -259,7 +266,7 @@
       ],
       "properties": {
         "name": {
-          "type": "String",
+          "type": "string",
           "uniqueItems": true
         },
         "price": {
@@ -307,7 +314,8 @@
 	      "_id",
 	      "child_categories",
 	      "id",
-	      "creationDate"
+	      "creationDate",
+		"name"
       ],
       "properties": {
         
@@ -324,7 +332,12 @@
           "uniqueItems": true
         }
         
-        , "creationDate": {
+	, "name": {
+          "type": "string",
+          "uniqueItems": true
+        }
+                
+	, "creationDate": {
           "type": "number",
           "uniqueItems": true
         }
